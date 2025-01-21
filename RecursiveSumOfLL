@@ -1,0 +1,65 @@
+
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node{
+    
+    int data;
+    struct Node *next;
+}
+*first = NULL;
+
+void create(int A[],int n){
+    
+    int i;
+    struct Node *t,*last;
+    first=(struct Node*)malloc(sizeof(struct Node));
+    first->data=A[0];
+    first->next=NULL;
+    last = first;
+    
+    for(int i=1; i<n; i++){
+        
+        t = (struct Node*)malloc(sizeof(struct Node));
+        t->data = A[i];
+        t->next = NULL;
+        last->next= t;
+        last = t;
+    }
+}
+
+void display(struct Node *p){
+    
+    while(p!=NULL){
+        
+        printf("%d",p->data);
+        printf(" ");
+        p=p->next;
+    }
+}
+
+int addition(struct Node *p){
+    
+    int sum=0;
+    
+   if(p==0){
+       
+       return 0;
+   }
+   else{
+       
+       return addition(p->next)+ p->data;
+   }
+}
+
+
+int main()
+{
+    int A[] = {12,34,23,11,16};
+    
+    create(A,5);
+    display(first);
+    printf("\nSum is %d",addition(first));
+    
+    return 0;
+}
