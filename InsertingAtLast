@@ -1,0 +1,77 @@
+
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node{
+    
+    int data;
+    struct Node *next;
+    
+};
+struct Node *first = NULL;
+struct Node *last = NULL;
+
+void create(int A[],int n){
+    
+    int i;
+    struct Node *t;
+    first=(struct Node*)malloc(sizeof(struct Node));
+    first->data=A[0];
+    first->next=NULL;
+    last=first;
+    
+    for(int i=1; i<n; i++){
+        
+        t=(struct Node*)malloc(sizeof(struct Node));
+        t->data = A[i];
+        t->next = NULL;
+        last->next=t;
+        last=t;
+    
+    }
+}
+
+void InsertLast(int x){
+    
+    struct Node *q=(struct Node*)malloc(sizeof(struct Node));
+    q->data=x;
+    q->next=NULL;
+    
+    if(first==NULL){
+        
+    first=last=q;
+    
+    }
+    else{
+        
+        last->next=q;
+        last=q;
+    }
+}
+
+void display(struct Node *p){
+    
+    while(p!=NULL){
+        
+        printf("%d",p->data);
+        printf(" ");
+        p=p->next;
+        
+    }
+}
+
+int main()
+{
+    int A[] = {10,20};
+    
+    printf("Linked list before Inserting at last\n");
+    create(A,2);
+    display(first);
+    
+    printf("\nLinked list after Inserting at last\n");
+    InsertLast(15);
+    display(first);
+    
+
+    return 0;
+}
