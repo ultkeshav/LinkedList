@@ -1,0 +1,32 @@
+class Solution {
+  public:
+    int getKthFromLast(Node *head, int k) {
+        
+        
+        if(head==nullptr || k<=0){
+            
+            return -1;
+        }
+        
+        Node* first = head;
+        Node* second = head;
+            
+        for(int i=0; i<k; ++i){
+                
+             if(first==nullptr){
+                    
+                    return -1;
+                }
+                
+                first = first->next;
+            }
+            
+        while(first!=nullptr){
+                
+                first = first->next;
+                second = second->next;
+            }
+            
+            return second->data;
+    }
+};
