@@ -1,0 +1,33 @@
+class Solution {
+  public:
+    // Function to find the length of a loop in the linked list.
+    int countNodesinLoop(Node *head) {
+        
+        
+        Node* slow = head;
+        Node* fast = head;
+        
+        while(fast!=NULL && fast->next!=NULL){
+            
+            slow = slow->next;
+            fast = fast->next->next;
+            
+            if(slow==fast){
+                
+            int length = 1;
+            Node* temp = slow->next;
+
+            while (temp != slow) {  // Count the cycle length
+                length++;
+                temp = temp->next;
+            }
+            
+              return length;
+            
+         }
+    
+        }
+        
+        return 0;
+    }
+};
