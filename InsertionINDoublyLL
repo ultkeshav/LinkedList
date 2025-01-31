@@ -1,0 +1,98 @@
+
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node{
+    
+    struct Node* prev;
+    int data;
+    struct Node* next;
+}*first=NULL;
+
+void create(int A[],int n){
+    
+    struct Node *t,*last;
+    int i;
+    
+    first = (struct Node *)malloc(sizeof(struct Node));
+    first->data = A[0];
+    first->prev = first->next = NULL;
+    last=first;
+    
+    for(i=1;i<n;i++){
+        
+        t = (struct Node *)malloc(sizeof(struct Node));
+        t->data = A[i];
+        t->next = last->next;
+        t->prev = last;
+        last->next = t; 
+        last = t;
+        
+    }
+}
+
+void Display(struct Node*p){
+    
+    while(p!=NULL){
+        
+        printf("%d",p->data);
+        printf(" ");
+        p=p->next;
+    }
+    printf("\n");
+}
+
+int LengthOFLL(struct Node *p){
+    
+    int count = 0;
+    
+    while(p!=NULL){
+        
+        count++;
+        p=p->next;
+    }
+    return count;
+}
+void Insert(struct Node*p,int index,int x){
+    struct Node*t;
+    int i;
+    
+    if(index<0 || index>LengthOFLL(p)){
+        return;
+    }
+    if(index==0){
+        
+        t=(struct Node*)malloc(sizeof(struct Node));
+        t->data=x;
+        t->prev=NULL;
+        t->next=first;
+        first->prev = t;
+        first = t;
+    }
+    else{
+        
+        for(i=0;i<index-1;i++){
+            
+            p=p->next;
+        }
+        t=(struct Node*)malloc(sizeof(struct Node));
+        t->data=x;
+        
+        t->prev = p;
+        t->next = p->next;
+        if(p->next)p->next->prev=t;
+        p->next=t;
+    }
+}
+int main()
+{
+    int A[] = {67,45,23,13,68,21};
+
+    create(A,6);
+    Insert(first,2,25);
+    Display(first);
+    printf("Length of doubly linked list is %d",LengthOFLL(first));
+    
+
+    return 0;
+}
